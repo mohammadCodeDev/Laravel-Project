@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        /*
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -34,6 +35,17 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+        });
+        */
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->id(); // کلید اصلی، incremental 
+            $table->string('name'); // نام کاربر 
+            $table->string('phoneNumber')->unique(); // شماره تلفن یکتا 
+            $table->string('password'); // رمز عبور هش شده 
+            // نقش کاربر: مشتری، مدیر، انباردار 
+            $table->enum('role', ['customer', 'admin', 'warehouse_keeper'])->default('customer');
+            $table->timestamps(); // ایجاد ستون‌های created_at و updated_at 
         });
     }
 
