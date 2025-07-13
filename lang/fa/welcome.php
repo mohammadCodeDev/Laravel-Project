@@ -6,4 +6,5 @@ return [
     'login' => 'ورود',
     'register' => 'ثبت نام',
     'main_heading' => 'به لاراول خوش آمدید',
+    'phone_number' => 'شماره تلفن',
 ];

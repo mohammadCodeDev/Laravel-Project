@@ -6,4 +6,5 @@ return [
     'login' => 'Log in',
     'register' => 'Register',
     'main_heading' => 'Welcome to Laravel',
+    'phone_number' => 'Phone Number',
 ];
