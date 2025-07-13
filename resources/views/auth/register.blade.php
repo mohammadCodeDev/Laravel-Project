@@ -10,7 +10,7 @@
         </div>
 
         <!-- Phone Number -->
-        <div>
+        <div class="mt-4">
             <x-input-label for="phoneNumber" :value="__('welcome.phone_number')" />
             <x-text-input id="phoneNumber" class="block mt-1 w-full" type="text" name="phoneNumber" :value="old('phoneNumber')" required autofocus />
             <x-input-error :messages="$errors->get('phoneNumber')" class="mt-2" />
