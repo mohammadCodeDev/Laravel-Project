@@ -9,4 +9,6 @@ return [
     'phone_number' => 'Phone Number',
     'back_to_home' => 'Back to Home',
     'register_prompt' => "Don't have an account?",
+    'dashboard' => 'Dashboard',
+    'logged_in' => "You're logged in!",
 ];
