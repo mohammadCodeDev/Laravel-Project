@@ -11,4 +11,5 @@ return [
     'register_prompt' => 'حساب کاربری ندارید؟',
     'dashboard' => 'داشبورد',
     'logged_in' => 'شما با موفقیت وارد شدید!',
+    'go_to_welcome' => 'رفتن به صفحه اصلی',
 ];

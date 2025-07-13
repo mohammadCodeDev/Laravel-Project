@@ -10,6 +10,14 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __('welcome.logged_in') }}
+
+                    <!-- link to welcome page -->
+                    <div class="mt-4">
+                        <a href="/" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                            {{ __('welcome.go_to_welcome') }}
+                        </a>
+                    </div>
+                    
                 </div>
             </div>
         </div>

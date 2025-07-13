@@ -11,4 +11,5 @@ return [
     'register_prompt' => "Don't have an account?",
     'dashboard' => 'Dashboard',
     'logged_in' => "You're logged in!",
+    'go_to_welcome' => 'Go to Welcome Page',
 ];
