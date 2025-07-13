@@ -7,4 +7,5 @@ return [
     'register' => 'Register',
     'main_heading' => 'Welcome to Laravel',
     'phone_number' => 'Phone Number',
+    'back_to_home' => 'Back to Home',
 ];
