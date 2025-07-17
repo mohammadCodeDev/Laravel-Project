@@ -35,22 +35,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     //Product Management Paths
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    // Route::get('/products', [ProductController::class, 'index'])->name('products.index'); //To display the product list
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index'); //To display the product list
 
     //User role management path
     Route::patch('/users/{user}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
 });
-
-Route::patch('/users/{user}/update-role', [UserController::class, 'updateRole'])
-    ->name('admin.users.updateRole')
-    ->middleware(['auth']);
-
-
-Route::get('/dashboard', function () {
-    $users = User::all(); // geting all the users
-    return view('dashboard', ['users' => $users]);
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 
 //Language change path
 Route::get('language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
