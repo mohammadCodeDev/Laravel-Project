@@ -1,4 +1,17 @@
 {
     "Manage User Roles": "Manage User Roles",
-    "Update": "Update"
+    "Update": "Update",
+    "Add New Product": "Add New Product",
+    "Product Name": "Product Name",
+    "Price": "Price",
+    "Stock": "Stock",
+    "Description": "Description",
+    "Product Image": "Product Image",
+    "Add Product": "Add Product",
+    "Product added successfully.": "Product added successfully.",
+    "Product List": "Product List",
+    "Image": "Image",
+    "Name": "Name",
+    "Choose a file": "Choose a file",
+    "No file chosen": "No file chosen"
 }

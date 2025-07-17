@@ -85,5 +85,17 @@
     "You're logged in!": "شما وارد شده‌اید!",
     "Your email address is unverified.": "ایمیل شما تایید نشده است.",
     "Manage User Roles": "مدیریت نقش‌های کاربران",
-    "Update": "بروزرسانی"
+    "Update": "بروزرسانی",
+    "Add New Product": "افزودن محصول جدید",
+    "Product Name": "نام محصول",
+    "Price": "قیمت",
+    "Stock": "موجودی انبار",
+    "Description": "توضیحات",
+    "Product Image": "تصویر محصول",
+    "Add Product": "افزودن محصول",
+    "Product added successfully.": "محصول با موفقیت اضافه شد.",
+    "Product List": "لیست محصولات",
+    "Image": "تصویر",
+    "Choose a file": "انتخاب فایل",
+    "No file chosen": "هیچ فایلی انتخاب نشده است"
 }
