@@ -33,7 +33,7 @@
 
                 <div class="space-y-4">
                     @foreach ($users as $user)
-                        {{-- مدیر نمی‌تواند نقش خودش را تغییر دهد --}}
+                        {{-- The manager cannot change his/her role. --}}
                         @if($user->id !== Auth::id())
                             <form method="POST" action="{{ route('admin.users.updateRole', $user) }}" class="flex items-center justify-between p-4 border dark:border-gray-700 rounded-lg">
                                 @csrf

@@ -46,16 +46,16 @@
                         <div class="mt-4">
                             <x-input-label for="image" :value="__('Product Image')" />
 
-                            {{-- دکمه سفارشی برای آپلود --}}
-                            <label class="mt-2 inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150 cursor-pointer">
-                                {{-- این متن قابل ترجمه است --}}
+                            {{-- Custom button for upload --}}
+                            <label class="mt-2 inline-flex items-center ... cursor-pointer">
+                                {{-- This text is translatable. --}}
                                 <span>{{ __('Choose a file') }}</span>
 
-                                {{-- فیلد آپلود اصلی که مخفی می‌شود --}}
-                                <input type="file" id="image" name="image" class="hidden" required onchange="document.getElementById('file-name').textContent = this.files[0] ? this.files[0].name : '{{ __('No file chosen') }}';">
+                                {{-- The main upload field is hidden. --}}
+                                 <input type="file" id="image" name="image" class="hidden" required>
                             </label>
 
-                            {{-- محلی برای نمایش نام فایل انتخاب شده --}}
+                            {{-- Place to display the selected file name. --}}
                             <span id="file-name" class="ms-4 text-sm text-gray-500 dark:text-gray-400">{{ __('No file chosen') }}</span>
 
                             <x-input-error :messages="$errors->get('image')" class="mt-2" />
@@ -73,3 +73,20 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.getElementById('image');
+        const fileNameSpan = document.getElementById('file-name');
+        
+        const noFileText = fileNameSpan.dataset.noFileText;
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileNameSpan.textContent = this.files[0].name;
+            } else {
+                fileNameSpan.textContent = noFileText;
+            }
+        });
+    });
+</script>
