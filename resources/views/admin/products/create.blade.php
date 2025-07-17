@@ -52,7 +52,7 @@
                                 <span>{{ __('Choose a file') }}</span>
 
                                 {{-- The main upload field is hidden. --}}
-                                 <input type="file" id="image" name="image" class="hidden" required>
+                                <input type="file" id="image" name="image" class="hidden" required>
                             </label>
 
                             {{-- Place to display the selected file name. --}}
@@ -72,13 +72,33 @@
             </div>
         </div>
     </div>
+
+    <!-- New box for links -->
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 flex items-center justify-start space-x-4 rtl:space-x-reverse">
+
+                <!-- Return to home page link -->
+                <a href="{{ route('welcome') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-gray-800 dark:text-gray-200 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-gray-500 focus:outline-none transition ease-in-out duration-150">
+                    {{ __('Go to Welcome Page') }}
+                </a>
+
+                <!-- Link to view product list -->
+                <a href="{{ route('admin.products.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-gray-800 dark:text-gray-200 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-gray-500 focus:outline-none transition ease-in-out duration-150">
+                    {{ __('View All Products') }}
+                </a>
+
+            </div>
+        </div>
+    </div>
+
 </x-app-layout>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const fileInput = document.getElementById('image');
         const fileNameSpan = document.getElementById('file-name');
-        
+
         const noFileText = fileNameSpan.dataset.noFileText;
 
         fileInput.addEventListener('change', function() {

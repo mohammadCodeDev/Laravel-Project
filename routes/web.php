@@ -15,7 +15,7 @@ use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 //Public routes that require login
 Route::middleware(['auth', 'verified'])->group(function () {
