@@ -15,7 +15,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @if(session('success'))
-                        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">{{ session('success') }}</div>
+                    <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">{{ session('success') }}</div>
                     @endif
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-700">
@@ -26,16 +26,30 @@
                         </thead>
                         <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                             @forelse ($newsItems as $news)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{{ $news->title }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                        {{-- We will implement these later --}}
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>
-                                        <form method="POST" action="#" class="inline-block ms-4"><button class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button></form>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{{ $news->title }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+
+                                    {{-- the edit link --}}
+                                    <a href="{{ route('admin.news.edit', $news) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>
+
+                                    {{-- Complete Delete Form --}}
+                                    <form method="POST"
+                                        action="{{ route('admin.news.destroy', $news) }}"
+                                        class="inline-block ms-4 delete-news-form"
+                                        data-confirm-message="{{ __('Are you sure you want to delete this news item?') }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900">
+                                            {{ __('Delete') }}
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                             @empty
-                                <tr><td colspan="2" class="px-6 py-4 text-center">{{ __('No news found.') }}</td></tr>
+                            <tr>
+                                <td colspan="2" class="px-6 py-4 text-center">{{ __('No news found.') }}</td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -44,3 +58,28 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // Find all forms with the 'delete-news-form' class
+        const deleteForms = document.querySelectorAll('.delete-news-form');
+
+        // Attach a submit event listener to each form
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function (event) {
+                // Prevent the form from submitting immediately
+                event.preventDefault();
+
+                // Get the confirmation message from the form's data-attribute
+                const message = form.dataset.confirmMessage;
+
+                // Show the confirmation dialog and submit if the user confirms
+                if (confirm(message)) {
+                    this.submit();
+                }
+            });
+        });
+    });
+</script>

@@ -122,5 +122,11 @@
     "News added successfully.": "خبر با موفقیت اضافه شد.",
     "No news found.": "هیچ خبری یافت نشد.",
     "Latest News": "آخرین اخبار",
-    "No news to display.": "هیچ خبری برای نمایش وجود ندارد."
+    "No news to display.": "هیچ خبری برای نمایش وجود ندارد.",
+    "News deleted successfully.": "خبر با موفقیت حذف شد.",
+    "Are you sure you want to delete this news item?": "آیا از حذف این خبر اطمینان دارید؟",
+    "Edit News": "ویرایش خبر",
+    "Update News": "به‌روزرسانی خبر",
+    "News updated successfully.": "خبر با موفقیت به‌روزرسانی شد.",
+    "Back to News List": "بازگشت به لیست اخبار"
 }
