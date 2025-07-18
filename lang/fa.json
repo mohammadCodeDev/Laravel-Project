@@ -112,5 +112,15 @@
     "Current Image": "تصویر فعلی",
     "Update Product": "به‌روزرسانی محصول",
     "Product updated successfully.": "محصول با موفقیت به‌روزرسانی شد.",
-    "Back to Product List": "بازگشت به لیست محصولات"
+    "Back to Product List": "بازگشت به لیست محصولات",
+    "Manage News": "مدیریت اخبار",
+    "News List": "لیست اخبار",
+    "Add News": "افزودن خبر",
+    "Title": "عنوان",
+    "Content": "محتوا",
+    "Save News": "ذخیره خبر",
+    "News added successfully.": "خبر با موفقیت اضافه شد.",
+    "No news found.": "هیچ خبری یافت نشد.",
+    "Latest News": "آخرین اخبار",
+    "No news to display.": "هیچ خبری برای نمایش وجود ندارد."
 }

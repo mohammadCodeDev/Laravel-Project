@@ -6,6 +6,8 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Models\User;
+use App\Http\Controllers\Admin\NewsController;
+use App\Models\News;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,8 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $news = News::latest()->take(5)->get(); // Get latest 5 news
+    return view('welcome', compact('news'));
 })->name('welcome');
 
 //Public routes that require login
@@ -46,6 +49,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     //User role management path
     Route::patch('/users/{user}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
+
+    // News Management Paths
+    Route::resource('news', NewsController::class);
 });
 
 //Language change path
