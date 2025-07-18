@@ -38,6 +38,12 @@
 
             <h1 class="text-2xl dark:text-white">{{ __('welcome.main_heading') }}</h1>
 
+            <div class="mt-6">
+                <a href="{{ route('products.index') }}" class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
+                    {{ __('View All Products') }}
+                </a>
+            </div>
+
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ __('Latest News') }}</h2>
 
             <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">

@@ -158,5 +158,11 @@
     "Toman": "تومان",
     "Confirm Delivery and Mark as Delivered": "تأیید تحویل و علامت‌گذاری به عنوان تحویل شده",
     "Back to Confirmed Orders": "بازگشت به لیست سفارشات تأیید شده",
-    "Shopping Cart": "سبد خرید"
+    "Shopping Cart": "سبد خرید",
+    "View All Products": "مشاهده همه محصولات",
+    "All Products": "همه محصولات",
+    "Add to Cart": "افزودن به سبد خرید",
+    "Login to purchase": "برای خرید وارد شوید",
+    "No products available at the moment.": "در حال حاضر محصولی برای نمایش وجود ندارد.",
+    "Product added to cart successfully!": "محصول با موفقیت به سبد خرید اضافه شد!"
 }

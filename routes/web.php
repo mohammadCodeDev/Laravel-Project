@@ -4,12 +4,14 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Models\User;
 use App\Http\Controllers\Admin\NewsController;
 use App\Models\News;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Warehouse\OrderController as WarehouseOrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,16 +40,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
     //Product Management Paths
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index'); //To display the product list
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
+    Route::get('/products', [AdminProductController::class, 'index'])->name('products.index'); //To display the product list
 
     //for deleting a product
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 
     //for editing and updating
-    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::patch('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::get('/products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+    Route::patch('/products/{product}', [AdminProductController::class, 'update'])->name('products.update');
 
     //User role management path
     Route::patch('/users/{user}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
@@ -69,6 +71,13 @@ Route::middleware(['auth', 'warehouse'])->prefix('warehouse')->name('warehouse.'
     Route::get('/orders/{order}', [WarehouseOrderController::class, 'show'])->name('orders.show');
 });
 
+// Public Product and Cart Routes
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+// This route requires the user to be logged in to add to cart
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+});
 
 //Language change path
 Route::get('language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
