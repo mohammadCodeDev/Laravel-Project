@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Models\User;
 use App\Http\Controllers\Admin\NewsController;
 use App\Models\News;
+use App\Http\Controllers\Admin\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // News Management Paths
     Route::resource('news', NewsController::class);
+
+    // Order Management Paths
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::patch('/orders/{order}/confirm', [OrderController::class, 'confirm'])->name('orders.confirm');
 });
 
 //Language change path

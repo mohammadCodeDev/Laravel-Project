@@ -128,5 +128,18 @@
     "Edit News": "ویرایش خبر",
     "Update News": "به‌روزرسانی خبر",
     "News updated successfully.": "خبر با موفقیت به‌روزرسانی شد.",
-    "Back to News List": "بازگشت به لیست اخبار"
+    "Back to News List": "بازگشت به لیست اخبار",
+    "Manage Orders": "مدیریت سفارشات",
+    "Order Management": "مدیریت سفارشات",
+    "Order ID": "شناسه سفارش",
+    "Customer": "مشتری",
+    "Total Price": "مبلغ کل",
+    "Status": "وضعیت",
+    "Date": "تاریخ",
+    "No orders found.": "هیچ سفارشی یافت نشد.",
+    "Order confirmed successfully.": "سفارش با موفقیت تأیید شد.",
+    "order_statuses.pending": "در انتظار",
+    "order_statuses.confirmed": "تأیید شده",
+    "order_statuses.delivered": "تحویل شده",
+    "order_statuses.canceled": "لغو شده"
 }
