@@ -51,9 +51,12 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                         {{-- The translated action links --}}
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-600">{{ __('Edit') }}</a>
-                                       
+
                                         {{-- Delete Button Form --}}
-                                        <form ... onsubmit='return confirm({{ json_encode(__('Are you sure you want to delete this product?')) }});'>
+                                        <form method="POST"
+                                            action="{{ route('admin.products.destroy', $product) }}"
+                                            class="inline-block ms-4 delete-form"
+                                            data-confirm-message="{{ __('Are you sure you want to delete this product?') }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-600">
@@ -82,3 +85,31 @@
         </div>
     </div>
 </x-app-layout>
+
+
+<script>
+    // Wait for the DOM to be fully loaded before running the script
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // Find all forms with the 'delete-form' class
+        const deleteForms = document.querySelectorAll('.delete-form');
+
+        // Loop through each form and attach an event listener
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function (event) {
+                // Prevent the form from submitting immediately
+                event.preventDefault();
+
+                // Get the confirmation message from the form's data-attribute
+                const message = form.dataset.confirmMessage;
+
+                // Show the confirmation dialog
+                if (confirm(message)) {
+                    // If the user clicks "OK", submit the form
+                    this.submit();
+                }
+            });
+        });
+    });
+</script>
+
