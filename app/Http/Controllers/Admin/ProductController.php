@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = \App\Models\Product::latest()->get();
+        $products = \App\Models\Product::latest()->paginate(10);
         return view('admin.products.index', ['products' => $products]);
     }
 
@@ -56,7 +56,7 @@ class ProductController extends Controller
         ]);
 
         //Finally, we return the user to the same form page with a success message.
-        return redirect()->route('admin.products.create')->with('success', __('Product added successfully.'));
+        return redirect()->route('admin.products.index')->with('success', __('Product added successfully.'));
     }
 
     /**
