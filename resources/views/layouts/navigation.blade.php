@@ -18,15 +18,6 @@
                 </div>
             </div>
 
-            <!-- Add product link for admin only -->
-            @if(Auth::user()->role === 'admin')
-            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <x-nav-link :href="route('admin.products.create')" :active="request()->routeIs('admin.products.create')">
-                    {{ __('Add New Product') }}
-                </x-nav-link>
-            </div>
-            @endif
-
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
