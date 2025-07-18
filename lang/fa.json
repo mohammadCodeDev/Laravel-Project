@@ -107,5 +107,9 @@
     "Admin Actions": "عملیات مدیر",
     "Manage Products": "مدیریت محصولات",
     "Product deleted successfully.": "محصول با موفقیت حذف شد.",
-    "Are you sure you want to delete this product?": "آیا از حذف این محصول اطمینان دارید؟"
+    "Are you sure you want to delete this product?": "آیا از حذف این محصول اطمینان دارید؟",
+    "Edit Product": "ویرایش محصول",
+    "Current Image": "تصویر فعلی",
+    "Update Product": "به‌روزرسانی محصول",
+    "Product updated successfully.": "محصول با موفقیت به‌روزرسانی شد."
 }

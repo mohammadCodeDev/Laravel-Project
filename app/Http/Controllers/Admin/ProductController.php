@@ -71,17 +71,41 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        // Simply return the edit view with the product data
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        // Step 1: Validate the input data
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image is optional on update
+        ]);
+
+        // Step 2: Handle the image upload if a new one is provided
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+            // Store the new image and update the path in the validated data array
+            $validated['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        // Step 3: Update the product with the validated data
+        $product->update($validated);
+
+        // Step 4: Redirect back to the product list with a success message
+        return redirect()->route('admin.products.index')->with('success', __('Product updated successfully.'));
     }
 
     /**
