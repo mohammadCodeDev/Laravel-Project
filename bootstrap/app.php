@@ -21,6 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
         //Middleware Admin Registration
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
+
+            'warehouse' => \App\Http\Middleware\WarehouseMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

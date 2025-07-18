@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Http\Controllers\Admin\NewsController;
 use App\Models\News;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Warehouse\OrderController as WarehouseOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::patch('/orders/{order}/confirm', [OrderController::class, 'confirm'])->name('orders.confirm');
 });
+
+// Special routes for warehouse keepers
+Route::middleware(['auth', 'warehouse'])->prefix('warehouse')->name('warehouse.')->group(function () {
+    Route::get('/orders', [WarehouseOrderController::class, 'index'])->name('orders.index');
+    Route::patch('/orders/{order}/deliver', [WarehouseOrderController::class, 'deliver'])->name('orders.deliver');
+});
+
 
 //Language change path
 Route::get('language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');

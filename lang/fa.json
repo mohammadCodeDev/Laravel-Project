@@ -141,5 +141,11 @@
     "order_statuses.pending": "در انتظار",
     "order_statuses.confirmed": "تأیید شده",
     "order_statuses.delivered": "تحویل شده",
-    "order_statuses.canceled": "لغو شده"
+    "order_statuses.canceled": "لغو شده",
+    "Warehouse Actions": "عملیات انبار",
+    "View Confirmed Orders": "مشاهده سفارشات تأیید شده",
+    "Confirmed Orders": "سفارشات تأیید شده",
+    "Mark as Delivered": "علامت‌گذاری به عنوان تحویل شده",
+    "No confirmed orders to display.": "هیچ سفارش تأیید شده‌ای برای نمایش وجود ندارد.",
+    "Order marked as delivered.": "سفارش به عنوان تحویل شده علامت‌گذاری شد."
 }

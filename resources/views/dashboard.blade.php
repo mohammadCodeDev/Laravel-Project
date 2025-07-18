@@ -99,4 +99,23 @@
         </div>
     </div>
     @endif
+
+    {{-- Warehouse Keeper Actions Panel --}}
+    @if(Auth::user()->role === 'warehouse_keeper')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <h3 class="font-semibold text-lg mb-4">{{ __('Warehouse Actions') }}</h3>
+                    <div class="flex items-center gap-4">
+                        <a href="{{ route('warehouse.orders.index') }}" class="inline-flex items-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:ring focus:ring-orange-200 active:bg-orange-600 disabled:opacity-25 transition">
+                            {{ __('View Confirmed Orders') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
 </x-app-layout>
