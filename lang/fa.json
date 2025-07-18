@@ -98,5 +98,10 @@
     "Image": "تصویر",
     "Choose a file": "انتخاب فایل",
     "No file chosen": "هیچ فایلی انتخاب نشده است",
-    "Go to Welcome Page": "رفتن به صفحه اصلی"
+    "Go to Welcome Page": "رفتن به صفحه اصلی",
+    "Actions": "عملیات",
+    "Edit": "ویرایش",
+    "Delete": "حذف",
+    "No Image": "بدون تصویر",
+    "No products found.": "هیچ محصولی یافت نشد."
 }
