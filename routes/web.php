@@ -31,12 +31,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 //Special routes for system administrators
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    
+
     //Product Management Paths
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products', [ProductController::class, 'index'])->name('products.index'); //To display the product list
-
+    
+    //for deleting a product
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    
     //User role management path
     Route::patch('/users/{user}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
 });
