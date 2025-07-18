@@ -147,5 +147,15 @@
     "Confirmed Orders": "سفارشات تأیید شده",
     "Mark as Delivered": "علامت‌گذاری به عنوان تحویل شده",
     "No confirmed orders to display.": "هیچ سفارش تأیید شده‌ای برای نمایش وجود ندارد.",
-    "Order marked as delivered.": "سفارش به عنوان تحویل شده علامت‌گذاری شد."
+    "Order marked as delivered.": "سفارش به عنوان تحویل شده علامت‌گذاری شد.",
+     "View Details & Deliver": "مشاهده جزئیات و تحویل",
+    "Order Details": "جزئیات سفارش",
+    "Customer Information": "اطلاعات مشتری",
+    "Customer Name": "نام مشتری",
+    "Phone Number": "شماره تلفن",
+    "Order Items": "اقلام سفارش",
+    "Quantity": "تعداد",
+    "Toman": "تومان",
+    "Confirm Delivery and Mark as Delivered": "تأیید تحویل و علامت‌گذاری به عنوان تحویل شده",
+    "Back to Confirmed Orders": "بازگشت به لیست سفارشات تأیید شده"
 }

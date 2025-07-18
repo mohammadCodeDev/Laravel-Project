@@ -64,6 +64,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 Route::middleware(['auth', 'warehouse'])->prefix('warehouse')->name('warehouse.')->group(function () {
     Route::get('/orders', [WarehouseOrderController::class, 'index'])->name('orders.index');
     Route::patch('/orders/{order}/deliver', [WarehouseOrderController::class, 'deliver'])->name('orders.deliver');
+
+    //show order details
+    Route::get('/orders/{order}', [WarehouseOrderController::class, 'show'])->name('orders.show');
 });
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Warehouse;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
@@ -20,5 +21,17 @@ class OrderController extends Controller
         // Update the order status to 'delivered'
         $order->update(['status' => 'delivered']);
         return redirect()->route('warehouse.orders.index')->with('success', __('Order marked as delivered.'));
+    }
+
+    public function show(Order $order)
+    {
+        // Ensure we only show confirmed orders and load related items
+        if ($order->status !== 'confirmed') {
+            abort(404);
+        }
+
+        $order->load('user', 'orderItems.product');
+
+        return view('warehouse.orders.show', compact('order'));
     }
 }
