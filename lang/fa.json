@@ -167,5 +167,12 @@
     "Product added to cart successfully!": "محصول با موفقیت به سبد خرید اضافه شد!",
     "Back to Welcome Page": "بازگشت به صفحه اصلی",
     "To add products to your cart, please": "برای افزودن محصولات به سبد خرید، لطفاً",
-    "or": "یا"
+    "or": "یا",
+    "Product": "محصول",
+    "Total": "مجموع",
+    "Remove": "حذف",
+    "Grand Total:": "جمع کل:",
+    "Finalize Purchase": "نهایی کردن خرید",
+    "Continue Shopping": "ادامه خرید",
+    "Are you sure you want to remove this item?": "آیا از حذف این مورد اطمینان دارید؟"
 }
