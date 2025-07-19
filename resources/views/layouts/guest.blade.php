@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'fa' ? 'rtl' : 'ltr' }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,40 +10,38 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        
-        <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex items-center">
-                        <a href="{{ route('welcome') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                        </a>
-                    </div>
-                    <div class="flex items-center">
-                        {{-- Language Switcher --}}
-                        <div class="me-4">
-                            <a href="{{ route('language.switch', 'fa') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700">فارسی</a>
-                            <span class="text-gray-400">|</span>
-                            <a href="{{ route('language.switch', 'en') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700">English</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
 
-        @if (isset($header))
-            <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
+    <div class="absolute top-0 left-0 p-6 z-10">
+        <a href="{{ route('language.switch', 'fa') }}" class="font-semibold text-gray-400">فارسی</a> |
+        <a href="{{ route('language.switch', 'en') }}" class="font-semibold text-gray-400">English</a>
+    </div>
 
-        <main>
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
+        <div>
+            <a href="/">
+                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            </a>
+        </div>
+
+        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
             {{ $slot }}
-        </main>
+        </div>
+
+        <div class="mt-6 text-center">
+            <a href="/" class="text-sm font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                @if(app()->getLocale() == 'en')
+                &larr;
+                @endif
+                {{ __('welcome.back_to_home') }}
+                @if(app()->getLocale() == 'fa')
+                &rarr;
+                @endif
+            </a>
+        </div>
+
     </div>
 </body>
+
 </html>
