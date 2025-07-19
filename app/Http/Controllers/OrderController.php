@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,8 +16,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        // FIX: Should be 'orders' (plural)
-        $orders = Auth::user()->orders()->with('items.product')->latest()->get(); // 
+        // Eager load all necessary relationships
+        $orders = Auth::user()
+            ->orders()
+            ->with(['items.product', 'confirmer', 'deliverer'])
+            ->latest()
+            ->get();
         return view('orders.index', compact('orders'));
     }
 

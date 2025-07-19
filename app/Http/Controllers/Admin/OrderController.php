@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -23,8 +24,12 @@ class OrderController extends Controller
      */
     public function confirm(Order $order)
     {
-        // Update the order status to 'confirmed'
-        $order->update(['status' => 'confirmed']);
+        // Update the order with status, confirmer ID, and confirmation timestamp
+        $order->update([
+            'status' => 'confirmed',
+            'confirmed_by' => Auth::id(),
+            'confirmed_at' => now(),
+        ]);
 
         // Redirect back with a success message
         return redirect()->route('admin.orders.index')->with('success', __('Order confirmed successfully.'));

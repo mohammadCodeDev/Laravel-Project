@@ -18,6 +18,10 @@ class Order extends Model
         'user_id',
         'total_price',
         'status',
+        'confirmed_by',
+        'confirmed_at',
+        'delivered_by',
+        'delivered_at',
     ];
 
     /**
@@ -31,5 +35,21 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    /**
+     * Get the admin user who confirmed the order.
+     */
+    public function confirmer()
+    {
+        return $this->belongsTo(User::class, 'confirmed_by');
+    }
+
+    /**
+     * Get the warehouse user who delivered the order.
+     */
+    public function deliverer()
+    {
+        return $this->belongsTo(User::class, 'delivered_by');
     }
 }

@@ -9,11 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @if(session('success'))
-                        <div class="mb-4 p-4 bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-200 rounded-lg">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                    {{-- ... success message ... --}}
 
                     @forelse($orders as $order)
                         <div class="mb-6 p-4 border dark:border-gray-700 rounded-lg">
@@ -31,7 +27,20 @@
                                 </div>
                             </div>
                             
-                            <div class="border-t dark:border-gray-600 pt-4">
+                            {{-- NEW: Status Details Section --}}
+                            <div class="mt-4 border-t dark:border-gray-600 pt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                                @if($order->status == 'confirmed' || $order->status == 'delivered')
+                                    <p>{{ __('Confirmed by') }}: <span class="font-semibold">{{ $order->confirmer->name ?? __('System') }}</span> {{ __('at') }} {{ $order->confirmed_at ? $order->confirmed_at->format('Y-m-d H:i') : '' }}</p>
+                                @endif
+                                @if($order->status == 'confirmed')
+                                    <p class="font-semibold text-blue-600 dark:text-blue-400">{{ __('Awaiting Warehouse Action') }}</p>
+                                @endif
+                                @if($order->status == 'delivered')
+                                    <p>{{ __('Delivered by') }}: <span class="font-semibold">{{ $order->deliverer->name ?? __('System') }}</span> {{ __('at') }} {{ $order->delivered_at ? $order->delivered_at->format('Y-m-d H:i') : '' }}</p>
+                                @endif
+                            </div>
+
+                            <div class="border-t dark:border-gray-600 mt-4 pt-4">
                                 <h4 class="font-semibold mb-2">{{ __('Items') }}</h4>
                                 <ul class="list-disc ps-5">
                                     @foreach($order->items as $item)

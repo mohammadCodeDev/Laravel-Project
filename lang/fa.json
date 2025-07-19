@@ -174,5 +174,10 @@
     "Grand Total:": "جمع کل:",
     "Finalize Purchase": "نهایی کردن خرید",
     "Continue Shopping": "ادامه خرید",
-    "Are you sure you want to remove this item?": "آیا از حذف این مورد اطمینان دارید؟"
+    "Are you sure you want to remove this item?": "آیا از حذف این مورد اطمینان دارید؟",
+    "Confirmed by": "تایید شده توسط",
+    "Delivered by": "تحویل شده توسط",
+    "at": "در تاریخ",
+    "Awaiting Warehouse Action": "در انتظار اقدام انبار",
+    "System": "سیستم"
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -18,8 +19,13 @@ class OrderController extends Controller
 
     public function deliver(Order $order)
     {
-        // Update the order status to 'delivered'
-        $order->update(['status' => 'delivered']);
+        // Update the order with status, deliverer ID, and delivery timestamp
+        $order->update([
+            'status' => 'delivered',
+            'delivered_by' => Auth::id(),
+            'delivered_at' => now(),
+        ]);
+        
         return redirect()->route('warehouse.orders.index')->with('success', __('Order marked as delivered.'));
     }
 
