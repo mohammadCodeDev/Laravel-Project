@@ -52,6 +52,10 @@
                             {{ __('Manage Orders') }}
                         </a>
 
+                        <a href="{{ route('admin.settings.index') }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 ...">
+                            {{ __('Manage Settings') }}
+                        </a>
+
                     </div>
                 </div>
             </div>

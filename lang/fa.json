@@ -186,5 +186,11 @@
     "Order Details for Order #": "جزئیات سفارش #",
     "Confirm and Finalize Delivery": "تایید و نهایی کردن تحویل",
     "My Account": "حساب کاربری من",
-    "My Orders": "سفارشات من"
+    "My Orders": "سفارشات من",
+    "Manage Settings": "مدیریت تنظیمات",
+    "Daily Iron Price (per kg)": "قیمت روز آهن (به ازای هر کیلوگرم)",
+    "Update Price": "به‌روزرسانی قیمت",
+    "Settings updated successfully.": "تنظیمات با موفقیت به‌روز شد.",
+    "Today's Iron Price": "قیمت امروز آهن",
+    "Toman / kg": "تومان / کیلوگرم"
 }

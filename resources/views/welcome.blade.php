@@ -38,6 +38,16 @@
 
             <h1 class="text-2xl dark:text-white">{{ __('welcome.main_heading') }}</h1>
 
+            @if($dailyIronPrice)
+            <div class="mt-8 p-6 bg-white dark:bg-gray-800/50 rounded-lg shadow-lg text-center">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('Today\'s Iron Price') }}</h3>
+                <p class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">
+                    {{ number_format($dailyIronPrice) }}
+                    <span class="text-base text-gray-500 dark:text-gray-300">{{ __('Toman / kg') }}</span>
+                </p>
+            </div>
+            @endif
+
             <div class="mt-6">
                 <a href="{{ route('products.index') }}" class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
                     {{ __('View All Products') }}

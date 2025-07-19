@@ -13,6 +13,8 @@ use App\Http\Controllers\Warehouse\OrderController as WarehouseOrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +22,7 @@ use App\Http\Controllers\OrderController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
-    $news = News::latest()->take(5)->get(); // Get latest 5 news
-    return view('welcome', compact('news'));
-})->name('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
 //Public routes that require login
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -61,6 +60,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Order Management Paths
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
     Route::patch('/orders/{order}/confirm', [AdminOrderController::class, 'confirm'])->name('orders.confirm');
+
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');
 });
 
 // Special routes for warehouse keepers
