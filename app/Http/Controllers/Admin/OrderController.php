@@ -14,8 +14,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        // Eager load the 'user' relationship to prevent N+1 query problems
-        $orders = Order::with('user')->latest()->paginate(15);
+        // Eager load all necessary relationships: user, items with their products, and the deliverer
+        $orders = Order::with(['user', 'items.product', 'deliverer'])->latest()->paginate(15);
         return view('admin.orders.index', compact('orders'));
     }
 
