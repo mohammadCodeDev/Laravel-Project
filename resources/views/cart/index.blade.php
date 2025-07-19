@@ -64,9 +64,11 @@
                         </a>
                         <div class="text-right">
                             <p class="text-lg font-semibold">{{ __('Grand Total:') }} {{ number_format($totalPrice) }} {{ __('Toman') }}</p>
-                            <form action="#" method="POST" class="mt-4">
+                            <form action="{{ route('orders.store') }}" method="POST" class="mt-4">
                                 @csrf
-                                <x-primary-button>{{ __('Finalize Purchase') }}</x-primary-button>
+                                <x-primary-button type="submit">
+                                    {{ __('Finalize Purchase') }}
+                                </x-primary-button>
                             </form>
                         </div>
                     </div>
