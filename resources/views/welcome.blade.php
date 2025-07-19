@@ -1,80 +1,96 @@
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'fa' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{ __('welcome.title') }}</title>
-
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <title>{{ __('welcome.title', ['default' => 'شرکت تعاونی در و پنجره سازان دزفول']) }}</title>
+    
+    {{-- Vite handles CSS/JS bundling --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+<body class="antialiased bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
 
-
-<body class="antialiased">
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-
-        <div class="sm:fixed sm:top-0 sm:left-0 p-6 z-10">
-            <a href="{{ route('language.switch', 'fa') }}" class="font-semibold text-gray-400">فارسی</a> |
-            <a href="{{ route('language.switch', 'en') }}" class="font-semibold text-gray-400">English</a>
+    {{-- HEADER: Contains top navigation --}}
+    <header class="absolute top-0 left-0 right-0 p-6 z-10 flex justify-between items-center">
+        {{-- Language Switcher --}}
+        <div class="space-x-4">
+            <a href="{{ route('language.switch', 'fa') }}" class="font-semibold text-gray-500 hover:text-white">فارسی</a>
+            <span class="text-gray-600">|</span>
+            <a href="{{ route('language.switch', 'en') }}" class="font-semibold text-gray-500 hover:text-white">English</a>
         </div>
 
+        {{-- Auth Links --}}
         @if (Route::has('login'))
-        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-            @auth
-            <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('welcome.dashboard') }}</a>
-            @else
-            <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('welcome.login') }}</a>
-
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('welcome.register') }}</a>
-            @endif
-            @endauth
-        </div>
-        @endif
-
-        <div class="max-w-7xl mx-auto p-6 lg:p-8">
-
-            <h1 class="text-2xl dark:text-white">{{ __('welcome.main_heading') }}</h1>
-
-            @if($dailyIronPrice)
-            <div class="mt-8 p-6 bg-white dark:bg-gray-800/50 rounded-lg shadow-lg text-center">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('Today\'s Iron Price') }}</h3>
-                <p class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">
-                    {{ number_format($dailyIronPrice) }}
-                    <span class="text-base text-gray-500 dark:text-gray-300">{{ __('Toman / kg') }}</span>
-                </p>
+            <div class="space-x-4">
+                @auth
+                    <a href="{{ url('/dashboard') }}" class="font-semibold hover:text-white">{{ __('welcome.dashboard') }}</a>
+                @else
+                    <a href="{{ route('login') }}" class="font-semibold hover:text-white">{{ __('welcome.login') }}</a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="font-semibold hover:text-white">{{ __('welcome.register') }}</a>
+                    @endif
+                @endauth
             </div>
+        @endif
+    </header>
+
+    {{-- MAIN CONTENT --}}
+    <main class="min-h-screen flex flex-col items-center justify-center bg-dots-darker bg-center dark:bg-dots-lighter selection:bg-red-500 selection:text-white">
+        <div class="max-w-7xl mx-auto p-6 lg:p-8 text-center">
+
+            {{-- Welcome Heading --}}
+            <section aria-labelledby="main-heading">
+                <h1 id="main-heading" class="text-3xl md:text-4xl font-bold dark:text-white">{{ __('welcome.main_heading') }}</h1>
+            </section>
+            
+            {{-- Daily Price Section --}}
+            @if($dailyIronPrice)
+                <section aria-labelledby="price-heading" class="mt-8 p-6 bg-white dark:bg-gray-800/50 rounded-lg shadow-lg">
+                    <h2 id="price-heading" class="text-xl font-semibold dark:text-white">{{ __("Today's Iron Price") }}</h2>
+                    <p class="text-4xl font-bold text-blue-500 mt-2">
+                        {{ number_format($dailyIronPrice) }}
+                        <span class="text-lg font-medium text-gray-500 dark:text-gray-400">{{ __('Toman / kg') }}</span>
+                    </p>
+                </section>
             @endif
 
-            <div class="mt-6">
-                <a href="{{ route('products.index') }}" class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
+            {{-- Call to Action Button --}}
+            <div class="mt-10">
+                <a href="{{ route('products.index') }}" class="inline-block px-8 py-4 bg-blue-600 text-white font-bold text-lg rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
                     {{ __('View All Products') }}
                 </a>
             </div>
-
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ __('Latest News') }}</h2>
-
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            
+        </div>
+    </main>
+    
+    {{-- NEWS SECTION --}}
+    <section aria-labelledby="news-heading" class="w-full bg-gray-200 dark:bg-gray-900/50 py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <h2 id="news-heading" class="text-3xl font-bold text-center mb-12 dark:text-white">{{ __('Latest News') }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 @forelse($news as $newsItem)
-                <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ $newsItem->title }}</h3>
-                        <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                            {{ $newsItem->content }}
+                    {{-- Article tag for each news item --}}
+                    <article class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-shadow">
+                        <header>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ $newsItem->title }}</h3>
+                            <p class="mt-1 text-xs text-gray-400 dark:text-gray-500">{{ $newsItem->created_at->format('Y-m-d') }}</p>
+                        </header>
+                        <p class="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+                            {{ Str::limit($newsItem->content, 150) }}
                         </p>
-                    </div>
-                    <p class="mt-4 text-xs text-gray-400 dark:text-gray-500">{{ $newsItem->created_at->format('Y-m-d') }}</p>
-                </div>
+                    </article>
                 @empty
-                <p class="text-gray-500 dark:text-gray-400">{{ __('No news to display.') }}</p>
+                    <p class="text-gray-500 dark:text-gray-400 md:col-span-2 text-center">{{ __('No news to display.') }}</p>
                 @endforelse
             </div>
         </div>
+    </section>
 
-    </div>
+    {{-- FOOTER --}}
+    <footer class="text-center p-6 text-sm text-gray-500 dark:text-gray-400">
+        <p>&copy; {{ date('Y') }} {{ __('welcome.title', ['default' => 'شرکت تعاونی در و پنجره سازان دزفول']) }}. {{ __('All rights reserved.') }}</p>
+    </footer>
 
 </body>
-
 </html>
