@@ -197,6 +197,9 @@
     "View Details": "مشاهده جزئیات",
     "Products List": "لیست محصولات",
     "Your shopping cart is empty.": "سبد خرید شما خالی است.",
-    "Read More": "ادامه مطلب"
-
+    "Read More": "ادامه مطلب",
+    "order_status.pending": "در انتظار تایید",
+    "order_status.confirmed": "تایید شده",
+    "order_status.delivered": "تحویل داده شده",
+    "Order marked as delivered and inventory updated.": "سفارش به عنوان تحویل شده علامت گذاری شده و موجودی به روز شده است."
 }

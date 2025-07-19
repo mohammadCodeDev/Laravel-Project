@@ -35,7 +35,7 @@ class OrderController extends Controller
                     // Find the product and decrement its inventory
                     // This uses a lock to prevent race conditions
                     $product = $item->product()->lockForUpdate()->first();
-                    $product->decrement('inventory', $item->quantity);
+                    $product->decrement('stock', $item->quantity);
                 }
 
                 // 2. Update the order status to 'delivered'
