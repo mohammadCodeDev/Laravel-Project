@@ -12,8 +12,11 @@ class OrderController extends Controller
 {
     public function index()
     {
-        // Fetch only 'confirmed' orders
-        $orders = Order::with('user')->where('status', 'confirmed')->latest()->get();
+        // Fetch 'confirmed' or 'delivered' orders and eager-load items for the modal
+        $orders = Order::with(['user', 'items.product'])
+            ->whereIn('status', ['confirmed', 'delivered'])
+            ->latest()
+            ->get();
         return view('warehouse.orders.index', compact('orders'));
     }
 
@@ -25,7 +28,7 @@ class OrderController extends Controller
             'delivered_by' => Auth::id(),
             'delivered_at' => now(),
         ]);
-        
+
         return redirect()->route('warehouse.orders.index')->with('success', __('Order marked as delivered.'));
     }
 

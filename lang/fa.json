@@ -182,5 +182,7 @@
     "System": "سیستم",
     "Awaiting Warehouse": "در انتظار انباردار",
     "Order Items for Order #": "اقلام سفارش #",
-    "No items in this order.": "هیچ موردی در این سفارش وجود ندارد."
+    "No items in this order.": "هیچ موردی در این سفارش وجود ندارد.",
+    "Order Details for Order #": "جزئیات سفارش #",
+    "Confirm and Finalize Delivery": "تایید و نهایی کردن تحویل"
 }
