@@ -17,8 +17,12 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
+        // Store the redirect URL in the session if it exists
+        if ($request->has('redirect')) {
+            session(['url.intended' => $request->redirect]);
+        }
         return view('auth.register');
     }
 
@@ -45,6 +49,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 }

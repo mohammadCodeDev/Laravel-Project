@@ -77,6 +77,8 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 // This route requires the user to be logged in to add to cart
 Route::middleware(['auth'])->group(function () {
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 });
 
 //Language change path

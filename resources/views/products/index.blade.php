@@ -21,7 +21,7 @@
 
             @guest
                 <div class="mb-6 p-4 bg-blue-100 border-l-4 border-blue-500 text-blue-700 dark:bg-blue-900/30 dark:border-blue-700 dark:text-blue-300">
-                    <p>{{ __('To add products to your cart, please') }} <a href="{{ route('login') }}" class="font-bold hover:underline">{{ __('Log in') }}</a> {{ __('or') }} <a href="{{ route('register') }}" class="font-bold hover:underline">{{ __('Register') }}</a>.</p>
+                    <p>{{ __('To add products to your cart, please') }} <a href="{{ route('login', ['redirect' => route('products.index')]) }}" class="font-bold hover:underline">{{ __('Log in') }}</a> {{ __('or') }} <a href="{{ route('register', ['redirect' => route('products.index')]) }}" class="font-bold hover:underline">{{ __('Register') }}</a>.</p>
                 </div>
             @endguest
 
