@@ -79,6 +79,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+    Route::patch('/cart/items/{cartItem}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/items/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
 });
 
 //Language change path

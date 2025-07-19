@@ -15,11 +15,11 @@
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                 <thead class="bg-gray-50 dark:bg-gray-700">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Product</th>
-                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Price</th>
-                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Quantity</th>
-                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Total</th>
-                                        <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Actions</th>
+                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ __('Product') }}</th>
+                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ __('Price') }}</th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ __('Quantity') }}</th>
+                                        <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ __('Total') }}</th>
+                                        <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">{{ __('Actions') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -27,11 +27,36 @@
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{{ $item->product->name }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ number_format($item->product->price) }} {{ __('Toman') }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $item->quantity }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                                {{-- Quantity Controls --}}
+                                                <div class="flex items-center justify-center">
+                                                    {{-- Decrease Button --}}
+                                                    <form action="{{ route('cart.update', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <input type="hidden" name="action" value="decrease">
+                                                        <button type="submit" class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded-md">-</button>
+                                                    </form>
+
+                                                    <span class="px-4">{{ $item->quantity }}</span>
+
+                                                    {{-- Increase Button --}}
+                                                    <form action="{{ route('cart.update', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <input type="hidden" name="action" value="increase">
+                                                        <button type="submit" class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded-md">+</button>
+                                                    </form>
+                                                </div>
+                                            </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ number_format($item->quantity * $item->product->price) }} {{ __('Toman') }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                                {{-- Add Remove button form here later --}}
-                                                <a href="#" class="text-red-500 hover:text-red-700">Remove</a>
+                                                {{-- Full Remove Button --}}
+                                                <form action="{{ route('cart.destroy', $item->id) }}" method="POST" onsubmit="return confirm('{{ __('Are you sure you want to remove this item?') }}');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-500 hover:text-red-700">{{ __('Remove') }}</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -39,7 +64,13 @@
                             </table>
                         </div>
 
-                        <div class="mt-8 flex justify-end">
+                        <div class="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                            {{-- Continue Shopping Button --}}
+                            <a href="{{ route('products.index') }}" class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150">
+                                {{ __('Continue Shopping') }}
+                            </a>
+                            
+                            {{-- Totals and Finalize Button --}}
                             <div class="text-right">
                                 <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                                     {{ __('Grand Total:') }} {{ number_format($totalPrice) }} {{ __('Toman') }}

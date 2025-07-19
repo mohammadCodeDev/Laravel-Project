@@ -9,50 +9,64 @@ use App\Models\CartItem;
 
 class CartController extends Controller
 {
-    /**
-     * Display the contents of the shopping cart.
-     */
     public function index()
     {
-        // Get the current user's cart and eager load items and their associated products
         $cart = Cart::with('items.product')->where('user_id', Auth::id())->first();
-
         $totalPrice = 0;
         if ($cart) {
-            // Calculate the total price of all items in the cart
-            $totalPrice = $cart->items->sum(function ($item) {
-                return $item->quantity * $item->product->price;
-            });
+            $totalPrice = $cart->items->sum(fn($item) => $item->quantity * $item->product->price);
         }
-
-        // Return the cart view with the cart data and total price
         return view('cart.index', compact('cart', 'totalPrice'));
     }
-
-    /**
-     * Add a product to the shopping cart.
-     */
     public function store(Request $request)
     {
         $request->validate(['product_id' => 'required|exists:products,id']);
-
-        // Find or create a cart for the currently authenticated user
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
-
-        // Check if the product is already in the cart
         $cartItem = $cart->items()->where('product_id', $request->product_id)->first();
-
         if ($cartItem) {
-            // If it exists, just increment the quantity by 1
             $cartItem->increment('quantity');
         } else {
-            // Otherwise, create a new item in the cart with quantity 1
-            $cart->items()->create([
-                'product_id' => $request->product_id,
-                'quantity' => 1,
-            ]);
+            $cart->items()->create(['product_id' => $request->product_id, 'quantity' => 1]);
+        }
+        return redirect()->back()->with('success', __('Product added to cart successfully!'));
+    }
+
+    /**
+     * Update the specified item in the cart.
+     */
+    public function update(Request $request, CartItem $cartItem)
+    {
+        // Authorization: Ensure the user owns the cart item
+        if ($cartItem->cart->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
         }
 
-        return redirect()->back()->with('success', __('Product added to cart successfully!'));
+        if ($request->action == 'increase') {
+            $cartItem->increment('quantity');
+        } elseif ($request->action == 'decrease') {
+            if ($cartItem->quantity > 1) {
+                $cartItem->decrement('quantity');
+            } else {
+                // If quantity is 1, remove the item completely
+                $cartItem->delete();
+            }
+        }
+
+        return redirect()->route('cart.index')->with('success', __('Cart updated successfully!'));
+    }
+
+    /**
+     * Remove the specified item from the cart.
+     */
+    public function destroy(CartItem $cartItem)
+    {
+        // Authorization: Ensure the user owns the cart item
+        if ($cartItem->cart->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $cartItem->delete();
+
+        return redirect()->route('cart.index')->with('success', __('Item removed from cart successfully!'));
     }
 }
